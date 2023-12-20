@@ -6,7 +6,7 @@
 #    By: jtollena <jtollena@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/30 13:47:45 by jtollena          #+#    #+#              #
-#    Updated: 2023/12/19 13:20:10 by jtollena         ###   ########.fr        #
+#    Updated: 2023/12/20 11:45:43 by jtollena         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SSOURCES = srcs/server/main.c
 COBJECTS = $(CSOURCES:.c=.o)
 SOBJECTS = $(SSOURCES:.c=.o)
 INCLUDES = includes
-FLAGS =  #-Wall -Wextra -Werror
+FLAGS =  -Wall -Wextra -Werror
 
 %.o: %.c
 	gcc $(FLAGS) -Ilibft -I $(INCLUDES) -c $< -o $@
@@ -27,17 +27,17 @@ FLAGS =  #-Wall -Wextra -Werror
 all: $(CLIENT) $(SERVER)
 
 $(SERVER): $(SOBJECTS) $(SINCLUDES)
-	make -C libft/
+	-make -C libft/
 	gcc $(SOBJECTS) -Llibft -lft -o $(SERVER)
 
 $(CLIENT): $(COBJECTS) $(CINCLUDES)
-	make -C libft/
+	-make -C libft/
 	gcc $(COBJECTS) -Llibft -lft -o $(CLIENT)
 
 clean:
 	rm $(COBJECTS)
 	rm $(SOBJECTS)
-#	make -C libft/ clean
+	make -C libft/ clean
 
 fclean:
 	rm $(COBJECTS)
